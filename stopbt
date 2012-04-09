@@ -1,11 +1,13 @@
-export kit=/sdcard/ubuntu
+#After exit command is executed clear it all up
+export kit=/sdcard/bt
 export bin=/system/bin
-export mnt=/data/local/ubuntu
+export mnt=/data/local/bt
 export PATH=$bin:/usr/bin:/usr/sbin:/bin:$PATH
 export TERM=linux
 export HOME=/root
-echo "Shutting down Ubuntu . . ."
+echo "Shutting down BackTrack . . ."
 sync
+#busybox umount -l $mnt/sdcard
 busybox umount -l $mnt/dev/pts
 busybox umount -l $mnt/proc 
 busybox umount -l $mnt/sys 
@@ -13,5 +15,5 @@ busybox umount -l $mnt
 busybox losetup -d /dev/block/loop254
 mount -o remount,ro -t yaffs2 /dev/block/mtdblock3 /system
 echo " "
-echo "Reboot to completly unmount Ubuntu"
-echo " "
+echo "Reboot to properly unmount BackTrack"
+echo "Especially if error encountered before this line"
