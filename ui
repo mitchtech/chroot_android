@@ -1,0 +1,8 @@
+if [ `pgrep Xtightvnc` ]
+then
+	echo "vncserver already running!"
+else
+	rm /tmp/.X11-unix/X1
+	rm -rf /tmp/.X1-lock
+	vncserver -geometry 850x480
+fi

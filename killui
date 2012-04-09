@@ -1,0 +1,4 @@
+kill -KILL `pidof Xtightvnc`
+rm /tmp/.X11-unix/X1
+rm -rf /tmp/.X1-lock
+
