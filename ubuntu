@@ -1,0 +1,9 @@
+#mount -o remount,rw -t yaffs2 /dev/block/mtdblock3 /system
+export kit=/sdcard/ubuntu
+export bin=/system/bin
+export mnt=/data/local/ubuntu
+export PATH=$bin:/usr/bin:/usr/sbin:/bin:$PATH
+export TERM=linux
+export HOME=/root
+echo " "
+busybox chroot $mnt /bin/bash

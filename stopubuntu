@@ -1,0 +1,17 @@
+export kit=/sdcard/ubuntu
+export bin=/system/bin
+export mnt=/data/local/ubuntu
+export PATH=$bin:/usr/bin:/usr/sbin:/bin:$PATH
+export TERM=linux
+export HOME=/root
+echo "Shutting down Ubuntu . . ."
+sync
+busybox umount -l $mnt/dev/pts
+busybox umount -l $mnt/proc 
+busybox umount -l $mnt/sys 
+busybox umount -l $mnt
+busybox losetup -d /dev/block/loop254
+mount -o remount,ro -t yaffs2 /dev/block/mtdblock3 /system
+echo " "
+echo "Reboot to completly unmount Ubuntu"
+echo " "

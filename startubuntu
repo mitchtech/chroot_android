@@ -1,0 +1,25 @@
+#Mount SYSTEM RW
+#mount -o remount,rw -t yaffs2 /dev/block/mtdblock3 /system
+export kit=/sdcard/ubuntu
+export bin=/system/bin
+export mnt=/data/local/ubuntu
+export PATH=$bin:/usr/bin:/usr/sbin:/bin:$PATH
+export TERM=linux
+export HOME=/root
+# Mounting Image to the farthest loop point
+# FIXME : check if mount sucessfull otherwise abort whole process.
+mknod /dev/block/loop254 b 7 254
+busybox losetup /dev/block/loop254 $kit/ubuntu.img
+busybox mount -t ext2 /dev/block/loop254 $mnt
+busybox mount -t devpts devpts $mnt/dev/pts
+busybox mount -t proc proc $mnt/proc
+busybox mount -t sysfs sysfs $mnt/sys
+#set up environment
+sysctl -w net.ipv4.ip_forward=1
+echo "Setting /etc/resolv.conf to Google Open DNS 8.8.8.8 and 8.8.4.4"
+echo "nameserver 8.8.8.8" > $mnt/etc/resolv.conf
+echo "nameserver 8.8.4.4" >> $mnt/etc/resolv.conf
+echo "127.0.0.1 localhost" > $mnt/etc/hosts
+echo "Ubuntu ready! to enter shell type 'ubuntu'"
+echo " "
+
